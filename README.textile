@@ -1,0 +1,3 @@
+h1. correios-api-py
+
+API Python para obter informações de encomendas/Sedex dos Correios.
