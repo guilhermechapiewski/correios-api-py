@@ -1,6 +1,6 @@
 h1. correios-api-py
 
-correios-api é uma API Python para rastrear encomendas dos Correios. 
+*correios-api-py* é uma API Python para rastrear encomendas dos Correios. 
 
 Esta API faz requests e parse no HTML do site dos correios para fornecer informações 
 sobre encomendas.
