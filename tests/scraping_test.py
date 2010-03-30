@@ -14,7 +14,9 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         example_file.close()
         
         urllib2_mock = Mock()
-        when(urllib2_mock).urlopen('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_ITEMCODE=&P_LINGUA=001&P_TESTE=&P_TIPO=001&P_COD_UNI=ES446391025BR').thenReturn(sample_html)
+        request_mock = Mock()
+        when(urllib2_mock).urlopen('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_ITEMCODE=&P_LINGUA=001&P_TESTE=&P_TIPO=001&P_COD_UNI=ES446391025BR').thenReturn(request_mock)
+        when(request_mock).read().thenReturn(sample_html)
         
         correios_website_scraper = CorreiosWebsiteScraper(urllib2_mock)
         encomenda = correios_website_scraper.get_encomenda_info('ES446391025BR')

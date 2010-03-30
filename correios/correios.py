@@ -1,6 +1,8 @@
 class EncomendaRepository(object):
-    
-    correios_website_scraper = None
+        
+    def __init__(self):
+        from scraping import CorreiosWebsiteScraper
+        self.correios_website_scraper = CorreiosWebsiteScraper()
     
     def get(self, numero):
         return self.correios_website_scraper.get_encomenda_info(numero)
