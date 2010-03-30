@@ -15,7 +15,7 @@ class YQLPage(webapp.RequestHandler):
             pass #will return empty result :)
         
         if encomenda:
-            self.response.out.write('<result>')
+            self.response.out.write('<results>')
         
             for status in encomenda.status:
                 detalhes = status.detalhes if status.detalhes else ''
@@ -26,9 +26,9 @@ class YQLPage(webapp.RequestHandler):
                 self.response.out.write('       <detalhes><![CDATA[%s]]></detalhes>' % detalhes)
                 self.response.out.write('   </status>')
         
-            self.response.out.write('</result>')
+            self.response.out.write('</results>')
         else:
-            self.response.out.write('<result />')
+            self.response.out.write('<results />')
 
 application = webapp.WSGIApplication(
                                      [('/yql.*', YQLPage)],
