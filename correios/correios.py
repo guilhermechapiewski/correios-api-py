@@ -7,6 +7,21 @@ class EncomendaRepository(object):
 
 class Encomenda(object):
     
+    def __init__(self, numero):
+        self.numero = numero
+        self.status = []
+    
+    def adicionar_status(self, status):
+        self.status.append(status)
+    
+    def ultimo_status_disponivel(self):
+        return self.status[len(self.status) - 1] if len(self.status) > 0 else None
+
+    def primeiro_status_disponivel(self):
+        return self.status[0] if len(self.status) > 0 else None
+
+class Status(object):
+    
     def __init__(self, **kwargs):
         self.data = kwargs.get('data')
         self.local = kwargs.get('local')
