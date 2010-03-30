@@ -2,3 +2,4 @@
 *.coverage
 dist
 build
+correios_api_py.egg-info
