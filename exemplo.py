@@ -1,4 +1,4 @@
-from correios import *
+from correios import Correios
 
 encomenda = Correios.encomenda("ES446391025BR")
 print encomenda.numero

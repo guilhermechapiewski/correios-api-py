@@ -1,3 +1,40 @@
 h1. correios-api-py
 
-API Python para obter informações de encomendas/Sedex dos Correios.
+correios-api é uma API Python para rastrear encomendas dos Correios. 
+
+Esta API faz requests e parse no HTML do site dos correios para fornecer informações 
+sobre encomendas.
+
+h2. Exemplo de uso
+
+<pre>
+from correios import Correios
+
+encomenda = Correios.encomenda("ES446391025BR")
+print encomenda.numero
+
+for status in encomenda.status:
+    print "Data: %s" % status.data
+    print "Local: %s" % status.local
+    print "Situacao: %s" % status.situacao
+    print "Detalhes: %s" % status.detalhes
+    print
+</pre>
+  
+Outra forma de uso útil:
+
+<pre>
+encomenda = Correios.encomenda("ES446391025BR")
+ultimo = encomenda.ultimo_status_disponivel()
+print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
+</pre>
+
+h2. Números de rastreamento para teste
+
+Outros números de encomenda para teste:
+
+  * RO811226537BR
+  * EC834786906BR
+  * SO376590583BR
+  * EC884014459BR
+  * EC726225124BR
