@@ -37,3 +37,17 @@ Outros números de encomenda para teste:
   * SO376590583BR
   * EC884014459BR
   * EC726225124BR
+
+h2. Como instalar?
+
+h3. Pelo código fonte:
+
+"Baixe o código fonte":http://github.com/guilhermechapiewski/correios-api-py/archives/master aqui no Github, faça unzip/untar do arquivo, vá para o diretório onde o código foi extraído e digite na linha de comando:
+
+<pre><code>$ sudo python setup.py install</code></pre>
+
+h3. Pelo PyPI (mais fácil):
+
+Você também pode instalar o último release estável pelo "PyPI":http://pypi.python.org/pypi/meme-py/ digitando na linha de comando:
+
+<pre><code>$ sudo easy_install correios-api-py</code></pre>
