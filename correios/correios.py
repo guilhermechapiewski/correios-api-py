@@ -13,6 +13,7 @@ class Encomenda(object):
     
     def adicionar_status(self, status):
         self.status.append(status)
+        self.status.sort(lambda x, y: 1 if x.data > y.data else -1)
     
     def ultimo_status_disponivel(self):
         return self.status[len(self.status) - 1] if len(self.status) > 0 else None

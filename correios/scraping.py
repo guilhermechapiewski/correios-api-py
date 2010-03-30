@@ -29,15 +29,13 @@ class CorreiosWebsiteScraper(object):
             if count > 4 and str(tr).strip() != '':
                 if re.match(r'\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}', tr.contents[0].string):
                     status.append(
-                            Status(data=tr.contents[0].string,
-                                    local=tr.contents[1].string,
-                                    situacao=tr.contents[2].font.string)
+                            Status(data=unicode(tr.contents[0].string),
+                                    local=unicode(tr.contents[1].string),
+                                    situacao=unicode(tr.contents[2].font.string))
                     )
                 else:
-                    status[len(status) - 1].detalhes = tr.contents[0].string
+                    status[len(status) - 1].detalhes = unicode(tr.contents[0].string)
                     
             count = count + 1
         
-        # TODO: remove from here, the status list should be ordered
-        status.reverse()
         return status
