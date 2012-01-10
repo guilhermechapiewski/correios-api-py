@@ -24,7 +24,7 @@ class CorreiosWebsiteScraper(object):
         html_info = re.search('.*(<table.*</TABLE>).*', html, re.S)
         table = html_info.group(1)
         
-        soup = BeautifulSoup(table)
+        soup = BeautifulSoup(table, fromEncoding='latin1')
         
         status = []
         count = 0
