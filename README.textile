@@ -44,7 +44,7 @@ Você também pode instalar o último release estável pelo "PyPI":http://pypi.p
 ou 
 <pre><code>$ sudo pip install correios-api-py</code></pre>
 
-h2.License
+h2. License
 
 	Copyright 2010 Guilherme Chapiewski
 
