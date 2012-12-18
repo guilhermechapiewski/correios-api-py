@@ -28,16 +28,6 @@ ultimo = encomenda.ultimo_status_disponivel()
 print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
 </pre>
 
-h2. Números de rastreamento para teste
-
-Outros números de encomenda para teste:
-
-  * RO811226537BR
-  * EC834786906BR
-  * SO376590583BR
-  * EC884014459BR
-  * EC726225124BR
-
 h2. Como instalar?
 
 h3. Pelo código fonte:
@@ -51,3 +41,5 @@ h3. Pelo PyPI (mais fácil):
 Você também pode instalar o último release estável pelo "PyPI":http://pypi.python.org/pypi/meme-py/ digitando na linha de comando:
 
 <pre><code>$ sudo easy_install correios-api-py</code></pre>
+ou 
+<pre><code>$ sudo pip install correios-api-py</code></pre>
