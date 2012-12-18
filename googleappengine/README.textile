@@ -1,1 +1,0 @@
-Um webservice simples rodando no Google App Engine.
