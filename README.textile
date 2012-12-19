@@ -32,7 +32,7 @@ h2. Como instalar?
 
 h3. Pelo código fonte:
 
-"Baixe o código fonte":http://github.com/guilhermechapiewski/correios-api-py/archives/master aqui no Github, faça unzip/untar do arquivo, vá para o diretório onde o código foi extraído e digite na linha de comando:
+Baixe o código fonte aqui no Github, faça unzip/untar do arquivo, vá para o diretório onde o código foi extraído e digite na linha de comando:
 
 <pre><code>$ sudo python setup.py install</code></pre>
 
@@ -44,8 +44,21 @@ Você também pode instalar o último release estável pelo "PyPI":http://pypi.p
 ou 
 <pre><code>$ sudo pip install correios-api-py</code></pre>
 
+h2. Como contribuir?
+
+h3. Issues
+
+Reporte um bug, sugira melhoras, faça perguntas. Para isso, use o menu de *Issues*
+
+h3. Pull Requests
+
+Fork o projeto e envie Pull Requests com as melhorias e/ou correções aplicadas usando o menu *Pull Requests*
+
+Ou apenas use o código! o/
+
 h2. License
 
+<pre>
 	Copyright 2010 Guilherme Chapiewski
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,3 +72,4 @@ h2. License
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+</pre>
