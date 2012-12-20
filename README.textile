@@ -1,13 +1,13 @@
-h1. correios-api-py
+h1. packtrack
 
-*correios-api-py* é uma API Python para rastrear encomendas dos Correios. 
-
-Esta API faz requests e parse no HTML do site dos correios para fornecer informações sobre encomendas.
+*packtrack* é uma API Python para rastrear encomendas de diversas empresas de logistica. 
 
 h2. Exemplo de uso
 
+h3. Rastreando encomenda dos Correios.
+
 <pre>
-from correios import Correios
+from packtrack import Correios
 
 encomenda = Correios.encomenda("ES446391025BR")
 print encomenda.numero
@@ -40,9 +40,7 @@ h3. Pelo PyPI (mais fácil):
 
 Você também pode instalar o último release estável pelo "PyPI":http://pypi.python.org/pypi/meme-py/ digitando na linha de comando:
 
-<pre><code>$ sudo easy_install correios-api-py</code></pre>
-ou 
-<pre><code>$ sudo pip install correios-api-py</code></pre>
+<pre><code>$ sudo pip install packtrack</code></pre>
 
 h2. Como contribuir?
 
@@ -57,6 +55,8 @@ Fork o projeto e envie Pull Requests com as melhorias e/ou correções aplicadas
 Ou apenas use o código! o/
 
 h2. License
+
+Uma parte desde trabalho é derivado do pacote "correios-api-py":https://github.com/guilhermechapiewski/correios-api-py e esta sob a licença abaixo:
 
 <pre>
 	Copyright 2010 Guilherme Chapiewski
@@ -73,3 +73,5 @@ h2. License
    See the License for the specific language governing permissions and
    limitations under the License.
 </pre>
+
+O restante do projeto esta licenciado da forma como se encontra no arquivo *COPYING* na raiz deste projeto

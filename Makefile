@@ -1,4 +1,4 @@
-# Makefile for correios-api-py
+# Makefile for packtrack
 
 help:
 	@echo
@@ -14,7 +14,7 @@ help:
 
 clean:
 	@echo "Cleaning..."
-	@rm -rf build dist *.pyc **/*.pyc *~ dist correios_api_py.egg-info
+	@rm -rf build dist *.pyc **/*.pyc *~ dist packtrack.egg-info
 
 compile: clean
 	@echo "Compiling source code..."
