@@ -12,5 +12,5 @@ setup(
     keywords = 'encomendas track api',
     url = 'https://github.com/CodingForChange/packtrack',
     long_description = 'API Python para obter informacoes de encomendas. Para mais detalhes veja a documentacao no Github: https://github.com/CodingForChange/packtrack/blob/master/README.textile',
-    install_requires = ['BeautifulSoup >= 3.1.0'],
+    install_requires = ['BeautifulSoup >= 3.1.0', 'requests >= 0.14.2'],
 )
