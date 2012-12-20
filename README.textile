@@ -1,5 +1,7 @@
 h1. packtrack
 
+!https://travis-ci.org/aleborba/packtrack.png?branch=master!:https://travis-ci.org/aleborba/packtrack
+
 *packtrack* é uma API Python para rastrear encomendas de diversas empresas de logistica. 
 
 h2. Exemplo de uso
