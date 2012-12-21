@@ -25,9 +25,21 @@ for status in encomenda.status:
 Outra forma de uso útil:
 
 <pre>
-encomenda = Correios.encomenda("ES446391025BR")
+encomenda = Correios.encomenda("seu_codigo_de_encomenda")
 ultimo = encomenda.ultimo_status_disponivel()
 print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
+</pre>
+
+h3. Rastreando encomenda da DHL Global Mail.
+
+<pre>
+from dhl_gm.dhl_gm import DhlGmTracker
+
+dhlgm = DhlGmTracker()
+
+infos = dhlgm.track('GM555113775306714774')
+
+print infos
 </pre>
 
 h2. Como instalar?
