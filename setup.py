@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name = 'packtrack',
     version = '0.1.0',
-    packages = ['packtrack'],
+    packages = ['correios', 'dhl_gm'],
     author = 'Ale Borba',
     author_email = 'ale.borba@codingforchange.com',
     description = 'API Python para obter informacoes de encomendas',
