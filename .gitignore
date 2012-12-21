@@ -2,4 +2,5 @@
 *.coverage
 dist
 build
-correios_api_py.egg-info
+packtrack.egg-info
+PKG-INFO
