@@ -4,3 +4,4 @@ dist
 build
 packtrack.egg-info
 PKG-INFO
+packtrack/

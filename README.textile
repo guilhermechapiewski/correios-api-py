@@ -42,6 +42,18 @@ infos = dhlgm.track('GM555113775306714774')
 print infos
 </pre>
 
+h3. Rastreando encomenda da Royal Mail
+
+<pre>
+from royal.royal import Royal
+
+royal = Royal()
+
+infos = royal.track('FI107380836GB')
+
+print infos
+</pre>
+
 h2. Como instalar?
 
 h3. Pelo código fonte:
