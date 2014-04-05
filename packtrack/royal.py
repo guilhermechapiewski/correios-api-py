@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Royal():
+class RoyalMail(object):
 
     def __init__(self):
         self.url = "http://www.royalmail.com/trackdetails"
@@ -24,7 +24,7 @@ class Royal():
 
         return results
 
-    def track(self, track_id):
+    def get(self, track_id):
         items = self._get_infos(track_id)
         result = []
         key = ['data', 'hora', 'status', 'local']

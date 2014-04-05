@@ -25,7 +25,7 @@ class DhlGmTracker():
 
         return resultado
 
-    def track(self, codigo):
+    def get(self, codigo):
         itens = self._get_infos_(codigo)
         result = []
 
