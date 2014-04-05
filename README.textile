@@ -11,7 +11,7 @@ h3. Rastreando encomenda dos Correios.
 <pre>
 from packtrack import Correios
 
-encomenda = Correios.encomenda("ES446391025BR")
+encomenda = Correios.track("UM_NUMERO_VALIDO_DE_ENCOMENDA")
 print encomenda.numero
 
 for status in encomenda.status:
@@ -25,7 +25,7 @@ for status in encomenda.status:
 Outra forma de uso útil:
 
 <pre>
-encomenda = Correios.encomenda("seu_codigo_de_encomenda")
+encomenda = Correios.track("seu_codigo_de_encomenda")
 ultimo = encomenda.ultimo_status_disponivel()
 print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
 </pre>
@@ -33,11 +33,11 @@ print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
 h3. Rastreando encomenda da DHL Global Mail.
 
 <pre>
-from dhl_gm.dhl_gm import DhlGmTracker
+from packtrack import DhlGm
 
-dhlgm = DhlGmTracker()
+dhlgm = DhlGm()
 
-infos = dhlgm.track('GM555113775306714774')
+infos = dhlgm.track('UM_NUMERO_DE_RASTREIO_VALIDO')
 
 print infos
 </pre>
@@ -45,11 +45,11 @@ print infos
 h3. Rastreando encomenda da Royal Mail
 
 <pre>
-from royal.royal import Royal
+from packtrack import Royal
 
 royal = Royal()
 
-infos = royal.track('FI107380836GB')
+infos = royal.track('UM_NUMERO_DE_RASTREIO_VALIDO')
 
 print infos
 </pre>
@@ -101,3 +101,5 @@ Uma parte desde trabalho é derivado do pacote "correios-api-py":https://github.
 </pre>
 
 O restante do projeto esta licenciado da forma como se encontra no arquivo *COPYING* na raiz deste projeto
+
+A parte de rastreio da Royal Mail foi inspirada no repositório PHP: https://github.com/roryoldershaw/PHP-Royal-Mail-Track-and-Trace
