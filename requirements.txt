@@ -1,3 +1,6 @@
 BeautifulSoup==3.2.1
+argparse==1.2.1
+beautifulsoup4==4.3.2
 mockito==0.5.1
 requests==0.14.2
+wsgiref==0.1.2
