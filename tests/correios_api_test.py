@@ -2,7 +2,7 @@ import unittest
 
 from mockito import *
 
-from correios import Correios
+from packtrack import Correios
 
 class CorreiosTest(unittest.TestCase):
     
@@ -12,4 +12,4 @@ class CorreiosTest(unittest.TestCase):
         
         Correios.encomenda_repository = encomenda_repository_mock
         
-        assert Correios.encomenda('123') == 'encomenda123'
+        assert Correios.track('123') == 'encomenda123'

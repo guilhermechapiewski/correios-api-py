@@ -2,7 +2,7 @@ import unittest
 
 from mockito import *
 
-from correios.correios import Encomenda, Status, EncomendaRepository
+from packtrack.correios import Encomenda, Status, EncomendaRepository
 
 class EncomendaRepositoryTest(unittest.TestCase):
     

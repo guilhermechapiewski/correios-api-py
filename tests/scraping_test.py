@@ -4,8 +4,8 @@ import unittest
 
 from mockito import *
 
-from correios.scraping import CorreiosWebsiteScraper
-from dhl_gm.dhl_gm import DhlGmTracker
+from packtrack.scraping import CorreiosWebsiteScraper
+from packtrack.dhl_gm import DhlGmTracker
 
 class CorreiosWebsiteScraperTest(unittest.TestCase):
     
