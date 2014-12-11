@@ -30,14 +30,15 @@ class CorreiosWebsiteScraper(object):
         count = 0
         for tr in soup.table:
             if count > 4 and str(tr).strip() != '':
-                if re.match(r'\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}', tr.contents[0].string):
+                content = tr.contents[0].renderContents()
+                if re.match(r'\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}', content):
                     status.append(
                             Status(data=unicode(tr.contents[0].string),
                                     local=unicode(tr.contents[1].string),
                                     situacao=unicode(tr.contents[2].font.string))
                     )
                 else:
-                    status[len(status) - 1].detalhes = unicode(tr.contents[0].string)
+                    status[len(status) - 1].detalhes = content.decode("utf-8")
                     
             count = count + 1
         
