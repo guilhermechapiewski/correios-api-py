@@ -16,6 +16,10 @@ class CorreiosWebsiteScraper(object):
         html = request.read()
         request.close()
         if html:
+            try:
+                html = html.decode('latin-1')
+            except UnicodeDecodeError:
+                pass
             encomenda = Encomenda(numero)
             [encomenda.adicionar_status(status) for status in self._get_all_status_from_html(html)]
             return encomenda

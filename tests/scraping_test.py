@@ -31,7 +31,7 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         assert encomenda.status[1].data == u'27/01/2009 18:51'
         assert encomenda.status[1].local == u'ACF FENIX - ITAPECERICA DA SERRA/SP'
         assert encomenda.status[1].situacao == u'Encaminhado'
-        assert encomenda.status[1].detalhes == u'Em trânsito para CTE JAGUARE - SAO PAULO/SP'
+        assert encomenda.status[1].detalhes == u'Em tr\xc3\xa2nsito para CTE JAGUARE - SAO PAULO/SP'
         
         assert encomenda.status[2].data == u'28/01/2009 03:36'
         assert encomenda.status[2].local == u'CTE JAGUARE - SAO PAULO/SP'
