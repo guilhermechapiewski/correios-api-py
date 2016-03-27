@@ -13,8 +13,12 @@ class CorreiosWebsiteScraper(object):
         self.http_client = http_client
 
     def get_encomenda_info(self, numero):
-        clean_numero = urllib2.quote(numero)
-        request = self.http_client.urlopen('%s%s' % (self.url, clean_numero))
+        url = '%s%s' % (self.url, urllib2.quote(numero))
+        try:
+            request = self.http_client.urlopen(url)
+        except urllib2.HTTPError:
+            return None
+
         html = request.read()
         request.close()
         if html:
