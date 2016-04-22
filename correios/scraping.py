@@ -1,4 +1,3 @@
-# vamos editar aqui
 import re
 import urllib2
 
@@ -16,10 +15,13 @@ class CorreiosWebsiteScraper(object):
         request = self.http_client.urlopen('%s%s' % (self.url, numero))
         html = request.read()
         request.close()
-        if html:
+        if html.find('Hist') != -1:
             encomenda = Encomenda(numero)
             [encomenda.adicionar_status(status) for status in self._get_all_status_from_html(html)]
             return encomenda
+        else:
+            raise Exception('invalid code!')
+
     
     def _get_all_status_from_html(self, html):
         html_info = re.search('.*(<table.*</TABLE>).*', html, re.S)
