@@ -24,9 +24,12 @@ except Exception as e:
 Outra forma de uso útil:
 
 <pre>
-encomenda = Correios.encomenda("ES446391025BR")
-ultimo = encomenda.ultimo_status_disponivel()
-print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
+try:
+  encomenda = Correios.encomenda("ES446391025BR")
+  ultimo = encomenda.ultimo_status_disponivel()
+  print "%s, %s, %s" % (ultimo.data, ultimo.local, ultimo.situacao)
+except Exception as e:
+  print e
 </pre>
 
 h2. Números de rastreamento para teste
