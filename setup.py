@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name = 'packtrack',
-    version = '1.0.8',
+    version = '1.1',
     packages = ['packtrack'],
     author = 'Ale Borba',
     author_email = 'ale.borba@codingforchange.com',
