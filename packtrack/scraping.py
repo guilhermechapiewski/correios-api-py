@@ -54,8 +54,10 @@ class CorreiosWebsiteScraper(_CorreiosWebsiteScraperBase):
         return value.replace('&nbsp;', ' ')
 
     def _get_all_status_from_html(self, html):
-        html_info = re.search('.*(<table.*</table>).*', html, re.S)
         status = []
+        if "<table" not in html:
+            return status
+        html_info = re.search('.*(<table.*</table>).*', html, re.S)
         if not html_info:
             return status
 
