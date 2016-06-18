@@ -2,7 +2,7 @@
 import os
 import unittest
 
-from mockito import when, Mock, any as ANY
+from mockito import when, Mock, any as ANY, verify
 
 from packtrack.scraping import CorreiosWebsiteScraper, CorreiosWebsroScraper
 from packtrack.dhl_gm import DhlGmTracker
@@ -88,6 +88,19 @@ class CorreiosWebsroScraperTest(unittest.TestCase):
         assert encomenda.status[5].local == u'CEE MOEMA - SAO PAULO/SP'
         assert encomenda.status[5].situacao == u'Entregue'
         assert encomenda.status[5].detalhes is None
+
+
+class CorreiosTimeoutTest(unittest.TestCase):
+
+    def test_timeout_undefined(self):
+        urllib2_mock = Mock()
+        request_mock = Mock()
+        TIMEOUT = 3
+        when(urllib2_mock).urlopen(ANY(), timeout=TIMEOUT) \
+            .thenReturn(request_mock)
+        scraper = CorreiosWebsiteScraper(urllib2_mock, timeout=TIMEOUT)
+        scraper.get_encomenda_info('ES446391025BR')
+        verify(urllib2_mock).urlopen(ANY(), timeout=TIMEOUT)
 
 
 class DhlGmBaseTest(object):

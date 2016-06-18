@@ -18,6 +18,22 @@ class EncomendaRepositoryTest(unittest.TestCase):
         assert encomenda
         assert encomenda.data == '2009-01-28 17:49:00'
 
+    def test_select_default_backend(self):
+        repository = EncomendaRepository()
+        self.assertEqual('CorreiosWebsroScraper',
+                         repository.correios_website_scraper.__class__.__name__)
+
+    def test_select_websro_backend(self):
+        repository = EncomendaRepository(backend='websro')
+        self.assertEqual('CorreiosWebsroScraper',
+                         repository.correios_website_scraper.__class__.__name__)
+
+    def test_select_www2_backend(self):
+        repository = EncomendaRepository(backend='www2')
+        self.assertEqual('CorreiosWebsiteScraper',
+                         repository.correios_website_scraper.__class__.__name__)
+
+
 class EncomendaTest(unittest.TestCase):
     
     def test_should_inform_last_status_available(self):

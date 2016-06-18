@@ -2,17 +2,25 @@ from correios import EncomendaRepository
 from royal import RoyalMail
 from dhl_gm import DhlGmTracker
 
+
 class Correios(object):
-    
-    encomenda_repository = EncomendaRepository()
-    
-    @staticmethod
-    def track(numero):
-        return Correios.encomenda_repository.get(numero)
+
+    _backends = {
+        None: EncomendaRepository(),
+    }
+
+    @classmethod
+    def track(cls, numero, backend=None):
+        try:
+            repository = cls._backends[backend]
+        except KeyError:
+            repository = EncomendaRepository(backend)
+            cls._backends[backend] = repository
+        return repository.get(numero)
 
 
 class Royal(object):
-    
+
     royal = RoyalMail()
 
     @staticmethod

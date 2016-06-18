@@ -9,13 +9,18 @@ from correios import Encomenda, Status
 
 class _CorreiosWebsiteScraperBase(object):
 
-    def __init__(self, http_client=urllib2):
+    def __init__(self, http_client=urllib2, timeout=None):
         self.http_client = http_client
+        self.timeout = timeout
 
     def get_encomenda_info(self, numero):
         req = self._req(numero)
+        kwargs = {}
+        if self.timeout is not None:
+            kwargs['timeout'] = self.timeout
+
         try:
-            request = self.http_client.urlopen(req)
+            request = self.http_client.urlopen(req, **kwargs)
         except urllib2.HTTPError:
             return None
 
@@ -95,8 +100,10 @@ class CorreiosWebsroScraper(_CorreiosWebsiteScraperBase):
         return req
 
     def _get_all_status_from_html(self, html):
-        html_info = re.search('.*(<table.*</TABLE>).*', html, re.S)
         status = []
+        if "<table" not in html:
+            return status
+        html_info = re.search('.*(<table.*</TABLE>).*', html, re.S)
         if not html_info:
             return status
 
