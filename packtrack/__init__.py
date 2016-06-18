@@ -5,12 +5,17 @@ from dhl_gm import DhlGmTracker
 
 class Correios(object):
 
+    encomenda_repository = None
+
     _backends = {
         None: EncomendaRepository(),
     }
 
     @classmethod
     def track(cls, numero, backend=None):
+        if backend is None and cls.encomenda_repository:
+            return cls.encomenda_repository
+
         try:
             repository = cls._backends[backend]
         except KeyError:
