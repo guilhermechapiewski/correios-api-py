@@ -8,7 +8,8 @@ class EncomendaRepository(object):
         return self.correios_website_scraper.get_encomenda_info(numero)
 
     def _init_scraper(self, backend):
-        from scraping import CorreiosWebsiteScraper, CorreiosWebsroScraper
+        from scraping import CorreiosWebsiteScraper, CorreiosWebsroScraper, \
+            CorreiosRastroService
         if backend is None:
             # usa websro como default, que é mais eficiente
             backend = 'websro'
@@ -16,6 +17,7 @@ class EncomendaRepository(object):
         backends = {
             'websro': CorreiosWebsroScraper,
             'www2': CorreiosWebsiteScraper,
+            'service': CorreiosRastroService,
         }
         Scraper = backends[backend]
         return Scraper()

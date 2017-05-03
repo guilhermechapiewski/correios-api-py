@@ -3,6 +3,7 @@ import urllib
 import urllib2
 
 from BeautifulSoup import BeautifulSoup
+from zeep import Client as Zeep
 
 from correios import Encomenda, Status
 
@@ -126,3 +127,39 @@ class CorreiosWebsroScraper(_CorreiosWebsiteScraperBase):
             count = count + 1
 
         return status
+
+
+class CorreiosRastroService(object):
+    url = 'http://webservice.correios.com.br/service/rastro/Rastro.wsdl'
+    default_kwargs = {
+        "usuario": "ECT",
+        "senha": "SRO",
+        "tipo": "L",  # lista de objetos
+        "resultado": "T",  # todos os eventos do objeto
+        "lingua": "101",  # pt-br
+    }
+
+    def __init__(self, timeout=None):
+        self.client = Zeep(wsdl=self.url)
+        if timeout is not None:
+            self.client.operation_timeout = self.client.timeout = timeout
+
+    def get_encomenda_info(self, numero):
+        kwargs = dict(self.default_kwargs, objetos=numero)
+
+        response = self.client.service.buscaEventos(**kwargs)
+        objeto = response.objeto[0]
+
+        encomenda = Encomenda(numero)
+        if objeto.erro:
+            pass
+        else:
+            for evento in objeto.evento:
+                data = u"{} {}".format(evento.data, evento.hora)
+                status = Status(
+                    data=data,
+                    local=evento.local,
+                    situacao=evento.descricao,
+                    detalhes=evento.detalhe)
+                encomenda.adicionar_status(status)
+        return encomenda
