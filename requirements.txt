@@ -5,3 +5,4 @@ lxml==2.3.5
 mockito==0.5.1
 requests==0.14.2
 wsgiref==0.1.2
+zeep==1.6.0
