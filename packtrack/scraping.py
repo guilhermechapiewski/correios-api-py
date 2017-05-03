@@ -4,6 +4,8 @@ import urllib2
 
 from BeautifulSoup import BeautifulSoup
 from zeep import Client as Zeep
+from zeep.cache import InMemoryCache
+from zeep.transports import Transport
 
 from correios import Encomenda, Status
 
@@ -140,7 +142,10 @@ class CorreiosRastroService(object):
     }
 
     def __init__(self, timeout=None):
-        self.client = Zeep(wsdl=self.url)
+        self.client = Zeep(
+            wsdl=self.url,
+            transport=Transport(cache=InMemoryCache()),
+        )
         if timeout is not None:
             self.client.operation_timeout = self.client.timeout = timeout
 
