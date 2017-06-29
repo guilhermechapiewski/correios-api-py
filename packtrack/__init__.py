@@ -12,7 +12,7 @@ class Correios(object):
     }
 
     @classmethod
-    def track(cls, numero, backend=None):
+    def track(cls, numero, backend=None, auth=None):
         if backend is None and cls.encomenda_repository:
             return cls.encomenda_repository
 
@@ -21,7 +21,8 @@ class Correios(object):
         except KeyError:
             repository = EncomendaRepository(backend)
             cls._backends[backend] = repository
-        return repository.get(numero)
+
+        return repository.get(numero, auth=auth)
 
 
 class Royal(object):

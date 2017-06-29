@@ -1,11 +1,14 @@
 # coding: utf-8
 class EncomendaRepository(object):
-
     def __init__(self, backend=None):
         self.correios_website_scraper = self._init_scraper(backend)
 
-    def get(self, numero):
-        return self.correios_website_scraper.get_encomenda_info(numero)
+    def get(self, numero, auth=None):
+        func = self.correios_website_scraper.get_encomenda_info
+        kwargs = {}
+        if self.correios_website_scraper.auth:
+            kwargs['auth'] = auth
+        return func(numero, **kwargs)
 
     def _init_scraper(self, backend):
         from scraping import CorreiosWebsiteScraper, CorreiosWebsroScraper, \
@@ -40,10 +43,17 @@ class Encomenda(object):
         return self.status[0] if self.status else None
 
 
-class Status(object):
+class Status(dict):
 
     def __init__(self, **kwargs):
-        self.data = kwargs.get('data')
-        self.local = kwargs.get('local')
-        self.situacao = kwargs.get('situacao')
-        self.detalhes = kwargs.get('detalhes')
+        self.data = kwargs.pop('data', None)
+        self.local = kwargs.pop('local', None)
+        self.situacao = kwargs.pop('situacao', None)
+        self.detalhes = kwargs.pop('detalhes', None)
+        self.update(kwargs)
+
+    def __getattr__(self, key):
+        return self[key]
+
+    def __setattr__(self, key, value):
+        self[key] = value

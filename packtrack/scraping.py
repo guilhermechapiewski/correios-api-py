@@ -11,6 +11,7 @@ from correios import Encomenda, Status
 
 
 class _CorreiosWebsiteScraperBase(object):
+    auth = False
 
     def __init__(self, http_client=urllib2, timeout=None):
         self.http_client = http_client
@@ -134,12 +135,11 @@ class CorreiosWebsroScraper(_CorreiosWebsiteScraperBase):
 class CorreiosRastroService(object):
     url = 'http://webservice.correios.com.br/service/rastro/Rastro.wsdl'
     default_kwargs = {
-        "usuario": "ECT",
-        "senha": "SRO",
         "tipo": "L",  # lista de objetos
         "resultado": "T",  # todos os eventos do objeto
         "lingua": "101",  # pt-br
     }
+    auth = True
 
     def __init__(self, timeout=None):
         self.client = Zeep(
@@ -149,8 +149,15 @@ class CorreiosRastroService(object):
         if timeout is not None:
             self.client.operation_timeout = self.client.timeout = timeout
 
-    def get_encomenda_info(self, numero):
-        kwargs = dict(self.default_kwargs, objetos=numero)
+    def get_encomenda_info(self, numero, auth=None):
+        if auth is None:
+            auth = ("ECT", "SRO")
+
+        kwargs = dict(
+            self.default_kwargs,
+            objetos=numero,
+            usuario=auth[0],
+            senha=auth[1])
 
         response = self.client.service.buscaEventos(**kwargs)
         objeto = response.objeto[0]
