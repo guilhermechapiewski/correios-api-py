@@ -39,7 +39,7 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
                             u'SANTO ANDRE/SP', u'Objeto encaminhado', detalhes)
 
         detalhes = u'Objeto encaminhado de Unidade Operacional em Sao Paulo / SP para Unidade de Distribuição em SAO JOSE DOS CAMPOS / SP'
-        self._assert_status(encomenda.status[2], u'08/06/2016 15:51',
+        self._assert_status(encomenda.status[2], u'01/07/2016 15:51',
                             u'SAO PAULO/SP', u'Objeto encaminhado', detalhes)
 
 
