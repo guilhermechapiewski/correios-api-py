@@ -1,3 +1,4 @@
+import os
 import re
 import urllib
 import urllib2
@@ -11,7 +12,10 @@ from correios import Encomenda, Status
 
 
 class CorreiosWebsiteScraper(object):
-    url = 'http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm'
+    url = os.getenv(
+        "CORREIOS_WWW2_URL",
+        'http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm'
+    )
     auth = False
 
     def __init__(self, http_client=urllib2, timeout=None):
