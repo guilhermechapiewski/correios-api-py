@@ -2,7 +2,7 @@
 import os
 import unittest
 
-from mockito import when, Mock, any as ANY, verify
+import mock
 
 from packtrack.scraping import CorreiosWebsiteScraper
 from packtrack.dhl_gm import DhlGmTracker
@@ -21,12 +21,12 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         sample_html = example_file.read()
         example_file.close()
 
-        urllib2_mock = Mock()
-        request_mock = Mock()
-        when(urllib2_mock).urlopen(ANY()).thenReturn(request_mock)
-        when(request_mock).read().thenReturn(sample_html)
+        http_client_mock = mock.Mock()
+        response_mock = mock.Mock()
+        http_client_mock.post.return_value = response_mock
+        response_mock.content = sample_html
 
-        correios_website_scraper = CorreiosWebsiteScraper(urllib2_mock)
+        correios_website_scraper = CorreiosWebsiteScraper(http_client_mock)
         numero = 'PJ859656941BR'
         encomenda = correios_website_scraper.get_encomenda_info(numero)
         self.assertEqual(numero, encomenda.numero)
@@ -46,14 +46,15 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
 class CorreiosTimeoutTest(unittest.TestCase):
 
     def test_timeout_undefined(self):
-        urllib2_mock = Mock()
-        request_mock = Mock()
+
+        http_client_mock = mock.Mock()
+        response_mock = mock.Mock()
+        http_client_mock.post.return_value = response_mock
+        response_mock.content = ''
         TIMEOUT = 3
-        when(urllib2_mock).urlopen(ANY(), timeout=TIMEOUT) \
-            .thenReturn(request_mock)
-        scraper = CorreiosWebsiteScraper(urllib2_mock, timeout=TIMEOUT)
+        scraper = CorreiosWebsiteScraper(http_client_mock, timeout=TIMEOUT)
         scraper.get_encomenda_info('ES446391025BR')
-        verify(urllib2_mock).urlopen(ANY(), timeout=TIMEOUT)
+        assert http_client_mock.post.call_args[1]['timeout'] == 3
 
 
 class DhlGmBaseTest(object):
