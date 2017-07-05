@@ -1,6 +1,5 @@
 import os
 import re
-import urllib2
 
 from BeautifulSoup import BeautifulSoup
 import requests
