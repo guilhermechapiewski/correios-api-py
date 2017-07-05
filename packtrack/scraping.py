@@ -11,7 +11,7 @@ from correios import Encomenda, Status
 
 
 class CorreiosWebsiteScraper(object):
-    url = 'http://www2.correios.com.br/sistemas/rastreamento/resultado.cfm'
+    url = 'http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm'
     auth = False
 
     def __init__(self, http_client=urllib2, timeout=None):
