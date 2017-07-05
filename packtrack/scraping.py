@@ -1,9 +1,10 @@
 import os
 import re
-import urllib
 import urllib2
 
 from BeautifulSoup import BeautifulSoup
+import requests
+from requests.exceptions import RequestException
 from zeep import Client as Zeep
 from zeep.cache import InMemoryCache
 from zeep.transports import Transport
@@ -18,7 +19,7 @@ class CorreiosWebsiteScraper(object):
     )
     auth = False
 
-    def __init__(self, http_client=urllib2, timeout=None):
+    def __init__(self, http_client=requests, timeout=None):
         self.http_client = http_client
         self.timeout = timeout
 
@@ -32,20 +33,21 @@ class CorreiosWebsiteScraper(object):
             'Referer': self.url,  # page refuses the call without this referer
             'Content-Type': "application/x-www-form-urlencoded",
         }
-        req = self.http_client.Request(self.url,
-                                       data=urllib.urlencode(data),
-                                       headers=headers)
         kwargs = {}
         if self.timeout is not None:
             kwargs['timeout'] = self.timeout
 
         try:
-            request = self.http_client.urlopen(req, **kwargs)
-        except urllib2.HTTPError:
+            response = self.http_client.post(
+                self.url,
+                data=data,
+                headers=headers,
+                **kwargs)
+        except RequestException:
             return None
 
-        html = request.read()
-        request.close()
+        html = response.content
+
         if html:
             try:
                 html = html.decode('latin-1')
