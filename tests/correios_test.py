@@ -20,12 +20,7 @@ class EncomendaRepositoryTest(unittest.TestCase):
 
     def test_select_default_backend(self):
         repository = EncomendaRepository()
-        self.assertEqual('CorreiosWebsroScraper',
-                         repository.correios_website_scraper.__class__.__name__)
-
-    def test_select_websro_backend(self):
-        repository = EncomendaRepository(backend='websro')
-        self.assertEqual('CorreiosWebsroScraper',
+        self.assertEqual('CorreiosWebsiteScraper',
                          repository.correios_website_scraper.__class__.__name__)
 
     def test_select_www2_backend(self):

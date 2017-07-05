@@ -11,14 +11,11 @@ class EncomendaRepository(object):
         return func(numero, **kwargs)
 
     def _init_scraper(self, backend):
-        from scraping import CorreiosWebsiteScraper, CorreiosWebsroScraper, \
-            CorreiosRastroService
+        from scraping import CorreiosWebsiteScraper, CorreiosRastroService
         if backend is None:
-            # usa websro como default, que é mais eficiente
-            backend = 'websro'
+            backend = 'www2'
 
         backends = {
-            'websro': CorreiosWebsroScraper,
             'www2': CorreiosWebsiteScraper,
             'service': CorreiosRastroService,
         }
