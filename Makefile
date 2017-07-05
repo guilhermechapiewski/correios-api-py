@@ -28,7 +28,7 @@ test: compile
 	@make clean
 	@echo "Starting tests..."
 	@export PYTHONPATH="$PYTHONPATH:`pwd`"
-	@nosetests -s --verbose --with-coverage --cover-erase --cover-package=correios tests/*
+	@nosetests -s --verbose --with-coverage --cover-erase --cover-package=packtrack tests/*
 	@make clean
 
 install:

@@ -3,6 +3,6 @@ argparse==1.2.1
 beautifulsoup4==4.3.2
 lxml==2.3.5
 mockito==0.5.1
-requests==0.14.2
+requests==2.18.1
 wsgiref==0.1.2
 zeep==1.6.0
