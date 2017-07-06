@@ -1,4 +1,8 @@
 # coding: utf-8
+from datetime import datetime
+import re
+
+
 class EncomendaRepository(object):
     def __init__(self, backend=None):
         self.correios_website_scraper = self._init_scraper(backend)
@@ -30,8 +34,17 @@ class Encomenda(object):
         self.status = []
 
     def adicionar_status(self, status):
+        d = datetime
         self.status.append(status)
-        self.status.sort(lambda x, y: 1 if x.data > y.data else -1)
+        t_format = self.validar_data(status.data)
+        self.status.sort(lambda x, y: 1 if d.strptime(x.data, t_format) > d.strptime(y.data, t_format) else -1)
+
+    def validar_data(self, data):
+        if re.match('^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$', data):
+            return '%Y-%m-%d %H:%M:%S'
+        if re.match('^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$', data):
+            return '%d/%m/%Y %H:%M'
+        raise ValueError('Formato de data desconhecido: {}'.format(data))
 
     def ultimo_status_disponivel(self):
         return self.status[-1] if self.status else None
