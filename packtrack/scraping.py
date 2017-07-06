@@ -1,7 +1,5 @@
 import os
 import re
-import urllib
-import urllib2
 from HTMLParser import HTMLParser
 
 from BeautifulSoup import BeautifulSoup
