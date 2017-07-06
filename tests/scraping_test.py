@@ -31,16 +31,16 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         encomenda = correios_website_scraper.get_encomenda_info(numero)
         self.assertEqual(numero, encomenda.numero)
 
-        detalhes = u'Objeto encaminhado de Unidade Operacional em Sao Paulo / SP para Unidade de Distribuição em SAO JOSE DOS CAMPOS / SP'
-        self._assert_status(encomenda.status[0], u'01/07/2016 15:51',
-                            u'SAO PAULO/SP', u'Objeto encaminhado', detalhes)
-
-        self._assert_status(encomenda.status[1], u'07/06/2016 13:17',
+        self._assert_status(encomenda.status[0], u'07/06/2016 13:17',
                             u'SANTO ANDRE/SP', u'Objeto postado', u'')
 
-        detalhes = u'Objeto encaminhado de Agéncia dos Correios em Santo Andre / SP para Unidade Operacional em Sao Paulo / SP'
-        self._assert_status(encomenda.status[2], u'07/06/2016 13:55',
+        detalhes = u'Objeto encaminhado de Agência dos Correios em Santo Andre / SP para Unidade Operacional em Sao Paulo / SP'
+        self._assert_status(encomenda.status[1], u'07/06/2016 13:55',
                             u'SANTO ANDRE/SP', u'Objeto encaminhado', detalhes)
+
+        detalhes = u'Objeto encaminhado de Unidade Operacional em Sao Paulo / SP para Unidade de Distribuição em SAO JOSE DOS CAMPOS / SP'
+        self._assert_status(encomenda.status[2], u'01/07/2016 15:51',
+                            u'SAO PAULO/SP', u'Objeto encaminhado', detalhes)
 
 
 class CorreiosTimeoutTest(unittest.TestCase):
