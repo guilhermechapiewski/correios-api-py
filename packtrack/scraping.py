@@ -1,5 +1,6 @@
 import os
 import re
+from HTMLParser import HTMLParser
 
 from BeautifulSoup import BeautifulSoup
 import requests
@@ -63,6 +64,7 @@ class CorreiosWebsiteScraper(object):
 
     def _get_all_status_from_html(self, html):
         status = []
+        html_parser = HTMLParser()
         if "<table" not in html:
             return status
         html_info = re.search('.*(<table.*</table>).*', html, re.S)
@@ -85,8 +87,8 @@ class CorreiosWebsiteScraper(object):
                     data = '%s %s' % (content[0].strip(), content[1].strip())
                     local = '/'.join(self._text(content[2]).rsplit(' / ', 1)).upper()
                 elif class_ == 'sroLbEvent':
-                    situacao = self._text(content[0])
-                    detalhes = self._text(content[1])
+                    situacao = html_parser.unescape(self._text(content[0]))
+                    detalhes = html_parser.unescape(self._text(content[1]))
                     if detalhes:
                         detalhes = u'%s %s' % (situacao, detalhes)
                     status.append(Status(data=data, local=local,
