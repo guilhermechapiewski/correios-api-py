@@ -15,7 +15,7 @@ from correios import Encomenda, Status
 class CorreiosWebsiteScraper(object):
     url = os.getenv(
         "CORREIOS_WWW2_URL",
-        'http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm'
+        'https://www2.correios.com.br/sistemas/rastreamento/ctrl/ctrlRastreamento.cfm'
     )
     auth = False
 
@@ -25,9 +25,9 @@ class CorreiosWebsiteScraper(object):
 
     def get_encomenda_info(self, numero):
         data = {
-            'P_LINGUA': '001',
-            'P_TIPO': '001',
+            'acao': 'track',
             'objetos': numero,
+            'btnPesq': 'Buscar',
         }
         headers = {
             'Referer': self.url,  # page refuses the call without this referer
