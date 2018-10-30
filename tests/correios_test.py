@@ -1,5 +1,6 @@
 import unittest
 
+from mock import Mock
 from mockito import *
 
 from packtrack.correios import Encomenda, Status, EncomendaRepository

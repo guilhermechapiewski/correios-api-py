@@ -1,6 +1,7 @@
 import unittest
 
-from mockito import when, Mock
+from mock import Mock
+from mockito import when
 
 from packtrack import Correios
 
