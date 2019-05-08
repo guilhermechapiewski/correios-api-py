@@ -2,7 +2,10 @@
 import os
 import unittest
 
-import mock
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from packtrack.scraping import CorreiosWebsiteScraper
 from packtrack.dhl_gm import DhlGmTracker
@@ -17,9 +20,9 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         self.assertEqual(detalhes, status.detalhes)
 
     def test_should_get_data_from_correios_website(self):
-        example_file = open('%s/tests/correios_website/exemplo_rastreamento_correios1.html' % os.getcwd())
-        sample_html = example_file.read()
-        example_file.close()
+        filename = '%s/tests/correios_website/exemplo_rastreamento_correios1.html' % os.getcwd()
+        with open(filename, "rb") as f:
+            sample_html = f.read()
 
         http_client_mock = mock.Mock()
         response_mock = mock.Mock()

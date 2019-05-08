@@ -1,5 +1,6 @@
 import requests
-from bs4 import BeautifulSoup
+
+from .bs import BeautifulSoup
 
 
 class RoyalMail(object):

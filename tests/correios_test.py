@@ -1,7 +1,11 @@
 import unittest
 
-from mock import Mock
-from mockito import *
+try:
+    from unittest.mock import Mock
+except ImportError:
+    from mock import Mock
+
+from mockito import when
 
 from packtrack.correios import Encomenda, Status, EncomendaRepository
 

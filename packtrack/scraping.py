@@ -1,15 +1,21 @@
 import os
 import re
-from HTMLParser import HTMLParser
 
-from BeautifulSoup import BeautifulSoup
+try:
+    from html.parser import HTMLParser
+    from html import unescape
+except ImportError:
+    from HTMLParser import HTMLParser
+    unescape = None
+
 import requests
 from requests.exceptions import RequestException
 from zeep import Client as Zeep
 from zeep.cache import InMemoryCache
 from zeep.transports import Transport
 
-from correios import Encomenda, Status
+from .bs import BeautifulSoup
+from .correios import Encomenda, Status
 
 
 class CorreiosWebsiteScraper(object):
@@ -65,6 +71,8 @@ class CorreiosWebsiteScraper(object):
     def _get_all_status_from_html(self, html):
         status = []
         html_parser = HTMLParser()
+        _unescape = unescape or html_parser.unescape
+
         if "<table" not in html:
             return status
         html_info = re.search('.*(<table.*</table>).*', html, re.S)
@@ -80,15 +88,17 @@ class CorreiosWebsiteScraper(object):
             except AttributeError:
                 continue
             for td in tds:
-                content = td.renderContents().replace('\r', ' ') \
-                    .split('<br />')
-                class_ = td['class']
+                content = td.renderContents().decode()
+                content = content.replace('\r', ' ')
+                content = content.replace('\xa0', ' ')
+                content = content.split('<br/>')
+                class_ = td['class'] and td['class'][0]
                 if class_ == 'sroDtEvent':
                     data = '%s %s' % (content[0].strip(), content[1].strip())
                     local = '/'.join(self._text(content[2]).rsplit(' / ', 1)).upper()
                 elif class_ == 'sroLbEvent':
-                    situacao = html_parser.unescape(self._text(content[0]))
-                    detalhes = html_parser.unescape(self._text(content[1]))
+                    situacao = _unescape(self._text(content[0]))
+                    detalhes = _unescape(self._text(content[1]))
                     if detalhes:
                         detalhes = u'%s %s' % (situacao, detalhes)
                     status.append(Status(data=data, local=local,
