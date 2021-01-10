@@ -1,8 +1,7 @@
 # encoding: UTF-8
 import os
 import unittest
-
-import mock
+from unittest.mock import Mock
 
 from packtrack.scraping import CorreiosWebsiteScraper
 from packtrack.dhl_gm import DhlGmTracker
@@ -17,14 +16,13 @@ class CorreiosWebsiteScraperTest(unittest.TestCase):
         self.assertEqual(detalhes, status.detalhes)
 
     def test_should_get_data_from_correios_website(self):
-        example_file = open('%s/tests/correios_website/exemplo_rastreamento_correios1.html' % os.getcwd())
-        sample_html = example_file.read()
-        example_file.close()
+        with open(f'{os.getcwd()}/tests/correios_website/exemplo_rastreamento_correios1.html', 'r', encoding='latin-1') as f:
+            sample_html = f.read()
 
-        http_client_mock = mock.Mock()
-        response_mock = mock.Mock()
+        http_client_mock = Mock()
+        response_mock = Mock()
         http_client_mock.post.return_value = response_mock
-        response_mock.content = sample_html
+        response_mock.text = sample_html
 
         correios_website_scraper = CorreiosWebsiteScraper(http_client_mock)
         numero = 'PJ859656941BR'
@@ -47,10 +45,10 @@ class CorreiosTimeoutTest(unittest.TestCase):
 
     def test_timeout_undefined(self):
 
-        http_client_mock = mock.Mock()
-        response_mock = mock.Mock()
+        http_client_mock = Mock()
+        response_mock = Mock()
         http_client_mock.post.return_value = response_mock
-        response_mock.content = ''
+        response_mock.text = ''
         TIMEOUT = 3
         scraper = CorreiosWebsiteScraper(http_client_mock, timeout=TIMEOUT)
         scraper.get_encomenda_info('ES446391025BR')

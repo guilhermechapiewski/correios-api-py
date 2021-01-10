@@ -1,6 +1,6 @@
-from correios import EncomendaRepository
-from royal import RoyalMail
-from dhl_gm import DhlGmTracker
+from .correios import EncomendaRepository
+from .royal import RoyalMail
+from .dhl_gm import DhlGmTracker
 
 
 class Correios(object):

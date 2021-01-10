@@ -1,5 +1,6 @@
 *.pyc
 *.coverage
+.eggs
 dist
 build
 packtrack.egg-info

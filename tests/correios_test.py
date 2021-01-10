@@ -1,23 +1,23 @@
 import unittest
-
-from mock import Mock
-from mockito import *
+from unittest.mock import Mock
 
 from packtrack.correios import Encomenda, Status, EncomendaRepository
+
 
 class EncomendaRepositoryTest(unittest.TestCase):
     
     def test_should_get_encomenda_by_numero(self):
         encomenda_123 = Status(data='2009-01-28 17:49:00')
-        
+
         correios_website_scraper_mock = Mock()
-        when(correios_website_scraper_mock).get_encomenda_info('123', auth=None).thenReturn(encomenda_123)
-        
+        correios_website_scraper_mock.get_encomenda_info.return_value = encomenda_123
+
         repository = EncomendaRepository()
         repository.correios_website_scraper = correios_website_scraper_mock
         encomenda = repository.get('123')
         assert encomenda
         assert encomenda.data == '2009-01-28 17:49:00'
+        correios_website_scraper_mock.get_encomenda_info.assert_called_with('123', auth=None)
 
     def test_select_default_backend(self):
         repository = EncomendaRepository()
